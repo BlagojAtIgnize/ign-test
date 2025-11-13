@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json",
+  "name": "dev",
+  "variableOverrides": [
+    {
+      "name": "conn",
+      "value": "123"
+    },
+    {
+      "name": "conn_inpro",
+      "value": "f87ab09e-a688-4718-a030-118b3aa4ed61"
+    }
+  ]
+}
