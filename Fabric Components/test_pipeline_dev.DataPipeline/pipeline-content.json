@@ -50,8 +50,6 @@
           "secureOutput": false
         },
         "name": "Lookup1",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": []
       },
       {
@@ -133,7 +131,14 @@
           "secureOutput": false
         },
         "name": "Copy data1",
-        "dependsOn": []
+        "dependsOn": [
+          {
+            "activity": "Lookup1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ],
     "libraryVariables": {
