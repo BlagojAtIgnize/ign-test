@@ -2,117 +2,129 @@
   "properties": {
     "activities": [
       {
+        "name": "Set variable1",
         "type": "SetVariable",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [],
+        "policy": {
+          "secureOutput": false,
+          "secureInput": false
+        },
         "typeProperties": {
           "variableName": "test",
           "value": {
             "value": "@pipeline().libraryVariables.Variables_1_conn",
             "type": "Expression"
           }
-        },
-        "policy": {
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Set variable1",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
-        "dependsOn": []
+        }
       },
       {
+        "name": "Lookup1",
         "type": "Lookup",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [],
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureOutput": false,
+          "secureInput": false
+        },
         "typeProperties": {
           "source": {
             "type": "AzureSqlSource",
-            "partitionOption": "None",
-            "queryTimeout": "02:00:00"
+            "queryTimeout": "02:00:00",
+            "partitionOption": "None"
           },
+          "firstRowOnly": false,
           "datasetSettings": {
+            "annotations": [],
             "type": "AzureSqlTable",
+            "schema": [],
             "typeProperties": {
               "schema": "dbo",
               "table": "SalesData",
               "database": "ignize-inpro-dev"
             },
-            "schema": [],
             "externalReferences": {
               "connection": "@pipeline().libraryVariables.Variables_1_conn_inpro"
-            },
-            "annotations": []
-          },
-          "firstRowOnly": false
-        },
+            }
+          }
+        }
+      },
+      {
+        "name": "Copy data1",
+        "type": "Copy",
+        "dependsOn": [],
         "policy": {
           "timeout": "0.12:00:00",
           "retry": 0,
           "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
+          "secureOutput": false,
+          "secureInput": false
         },
-        "name": "Lookup1",
-        "dependsOn": []
-      },
-      {
-        "type": "Copy",
         "typeProperties": {
           "source": {
             "type": "FabricSqlDatabaseSource",
-            "partitionOption": "None",
             "queryTimeout": "02:00:00",
+            "partitionOption": "None",
             "datasetSettings": {
-              "type": "FabricSqlDatabaseTable",
-              "typeProperties": {
-                "schema": "dbo",
-                "table": "Entity"
-              },
-              "schema": [],
+              "annotations": [],
               "connectionSettings": {
-                "name": "TestCoordinator",
+                "name": "64c65f42_e937_4dbf_bddf_8a7a36b909f2",
                 "properties": {
+                  "annotations": [],
                   "type": "FabricSqlDatabase",
                   "typeProperties": {
-                    "artifactId": "f3a9014b-9b54-92f2-4d7a-e202aa02dd45",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000"
+                    "workspaceId": "@pipeline().DataFactory",
+                    "artifactId": "@pipeline().libraryVariables.Variables_1_TestCoordinator_warehouse_id"
                   },
                   "externalReferences": {
                     "connection": "7a711b5e-ffc2-40f3-b425-dbe976393c08"
-                  },
-                  "annotations": []
+                  }
                 }
               },
-              "annotations": []
+              "type": "FabricSqlDatabaseTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "Entity"
+              }
             }
           },
           "sink": {
             "type": "DataWarehouseSink",
-            "tableOption": "autoCreate",
             "allowCopyCommand": true,
             "copyCommandSettings": {},
+            "tableOption": "autoCreate",
             "datasetSettings": {
-              "type": "DataWarehouseTable",
-              "typeProperties": {
-                "schema": "dbo",
-                "table": "Entity"
-              },
-              "schema": [],
+              "annotations": [],
               "connectionSettings": {
-                "name": "TestLandingDW",
+                "name": "d2d2bcc7_94c3_40df_af19_24ca60d1ce06",
                 "properties": {
+                  "annotations": [],
                   "type": "DataWarehouse",
                   "typeProperties": {
-                    "artifactId": "016d0e3a-053e-4865-a8d8-d95ae8f75085",
-                    "endpoint": "dhjpm7bkhtuevofl3dy2loqooa-2s5gu3j47gje7pdizrj3tnt4ia.datawarehouse.fabric.microsoft.com",
+                    "endpoint": "@pipeline().libraryVariables.Variables_1_TestLandingDW_conn_string",
+                    "artifactId": "@pipeline().libraryVariables.Variables_1_TestLandingDW",
                     "workspaceId": "6d6abad4-f93c-4f92-bc68-cc53b9b67c40"
                   },
                   "externalReferences": {
                     "connection": "a778745b-2808-4fe3-962d-dff82d364593"
-                  },
-                  "annotations": []
+                  }
                 }
               },
-              "annotations": []
+              "type": "DataWarehouseTable",
+              "schema": [],
+              "typeProperties": {
+                "schema": "dbo",
+                "table": "Entity"
+              }
             }
           },
+          "enableStaging": true,
           "translator": {
             "type": "TabularTranslator",
             "typeConversion": true,
@@ -120,27 +132,15 @@
               "allowDataTruncation": true,
               "treatBooleanAsNumber": false
             }
-          },
-          "enableStaging": true
-        },
-        "policy": {
-          "timeout": "0.12:00:00",
-          "retry": 0,
-          "retryIntervalInSeconds": 30,
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Copy data1",
-        "dependsOn": [
-          {
-            "activity": "Lookup1",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
           }
-        ]
+        }
       }
     ],
+    "variables": {
+      "test": {
+        "type": "String"
+      }
+    },
     "libraryVariables": {
       "Variables_1_conn": {
         "type": "String",
@@ -151,11 +151,31 @@
         "type": "String",
         "variableName": "conn_inpro",
         "libraryName": "Variables_1"
-      }
-    },
-    "variables": {
-      "test": {
-        "type": "String"
+      },
+      "Variables_1_TestLandingDW": {
+        "type": "String",
+        "variableName": "TestLandingDW",
+        "libraryName": "Variables_1"
+      },
+      "Variables_1_TestLandingDW_conn_string": {
+        "type": "String",
+        "variableName": "TestLandingDW_conn_string",
+        "libraryName": "Variables_1"
+      },
+      "Variables_1_TestCoordinator": {
+        "type": "String",
+        "variableName": "TestCoordinator",
+        "libraryName": "Variables_1"
+      },
+      "Variables_1_TestCoordinator_conn_string": {
+        "type": "String",
+        "variableName": "TestCoordinator_conn_string",
+        "libraryName": "Variables_1"
+      },
+      "Variables_1_TestCoordinator_warehouse_id": {
+        "type": "String",
+        "variableName": "TestCoordinator_warehouse_id",
+        "libraryName": "Variables_1"
       }
     }
   }

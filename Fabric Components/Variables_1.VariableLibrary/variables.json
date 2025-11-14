@@ -12,6 +12,36 @@
       "note": "",
       "type": "Guid",
       "value": "0dcb6557-a58f-4473-84a9-56fc699929b1"
+    },
+    {
+      "name": "TestLandingDW",
+      "note": "",
+      "type": "String",
+      "value": "TestLandingDW"
+    },
+    {
+      "name": "TestLandingDW_conn_string",
+      "note": "",
+      "type": "String",
+      "value": "dhjpm7bkhtuevofl3dy2loqooa-4puqk3mvlyjujhabujwsb5nceq.datawarehouse.fabric.microsoft.com"
+    },
+    {
+      "name": "TestCoordinator",
+      "note": "",
+      "type": "String",
+      "value": "TestCoordinator"
+    },
+    {
+      "name": "TestCoordinator_conn_string",
+      "note": "",
+      "type": "String",
+      "value": "dhjpm7bkhtuevofl3dy2loqooa-4puqk3mvlyjujhabujwsb5nceq.datawarehouse.fabric.microsoft.com"
+    },
+    {
+      "name": "TestCoordinator_warehouse_id",
+      "note": "",
+      "type": "Guid",
+      "value": "94ed37e7-ef61-4626-9eae-dd926a368c85"
     }
   ]
 }

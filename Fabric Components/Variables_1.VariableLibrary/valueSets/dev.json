@@ -9,6 +9,14 @@
     {
       "name": "conn_inpro",
       "value": "f87ab09e-a688-4718-a030-118b3aa4ed61"
+    },
+    {
+      "name": "TestLandingDW_conn_string",
+      "value": "dhjpm7bkhtuevofl3dy2loqooa-2s5gu3j47gje7pdizrj3tnt4ia.datawarehouse.fabric.microsoft.com"
+    },
+    {
+      "name": "TestCoordinator_conn_string",
+      "value": "dhjpm7bkhtuevofl3dy2loqooa-2s5gu3j47gje7pdizrj3tnt4ia.datawarehouse.fabric.microsoft.com"
     }
   ]
 }
